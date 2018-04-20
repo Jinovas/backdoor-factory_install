@@ -153,6 +153,6 @@ echo -e " ${bold} ... symlink exec${normal}"
 SYMLINKEX2TO1
 
 echo -e " ${bold} ... copy xfce .desktop files${normal}"
-CPDESKTFL
+WRTEDSKTPFLS
 
 echo -e " $YELLOW ${bold} backdoor factory setup COMPLETE :)${normal}"
