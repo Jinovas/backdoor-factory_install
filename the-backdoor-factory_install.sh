@@ -1,10 +1,10 @@
 #!/bin/bash
 
-## Backdoor Factory Setup - XFCE, 16.04
+## /secretsquirrel/the-backdoor-factory Factory Setup - XFCE, 16.04
 
 ######################## CONFIG_MAIN - START ########################
 
-
+sudo chown -R $USER:$USER /opt
 
 GITREPO=https://github.com/secretsquirrel/the-backdoor-factory
 BRANCH=master
@@ -18,57 +18,7 @@ DSKTPFLSDEST=/home/$USER/.local/share/applications/9.Maintain-Access/1.OS-Backdo
 DSKTPFL=backdoorfactory.desktop
 APTLSTDIR=/opt/ownsec/ITSEC-Install-Scripts-ORIG/9.Maintain-Access/1.OS-Backdoors/0.MultiOS-Backdoor/the-backdoor-factory
 #ph1a
-
 ######################## CONFIG_MAIN - END ########################
-######################## CONFIG_temp - END ########################
-
-BANNER () {
-
-echo "${bold}
- ____  ____  _____ 
-| __ )|  _ \|  ___|
-|  _ \| | | | |_   
-| |_) | |_| |  _|  
-|____/|____/|_|    
-           
-INSTALL secretsquirrel/the-backdoor-factory
-${normal}"
-}
-
-#plh11
-
-INSTDEPS () {
-### DEPS:
-
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install python python-capstone python-pefile
-sudo udpatedb
-sudo ldconfig
-### DEPS END
-}
-
-INSTALLROUTINE1 () {
- cd osslsigncode
-    ./autogen.sh
-    ./configure
-	make
-	make install
-    cd ..	
-
-	uname -a | grep -i "armv" &> /dev/null
-        if [ $? -ne 0 ]; then
-                echo "[*] installing appack for onionduke"
-		echo "[*] installing dependences"
-		sudo apt-get install libc6-dev-i386
-                cd ./aPLib/example/
-                gcc -c -I../lib/elf -m32 -Wall -O2 -s -o appack.o appack.c -v 
-                gcc -m32 -Wall -O2 -s -o appack appack.o ../lib/elf/aplib.a -v 
-                sudo cp ./appack /usr/bin/appack        
-        else
-                echo "[!!!!] Arm not supported for aPLib"
-	fi
-}
 
 ######################## MISC - START ########################
 # color
@@ -114,12 +64,6 @@ sudo rm -f $BINDIR/$EXECUTEABLE2
 sudo ln -s $GITREPOROOT/$EXECUTEABLE1 $BINDIR/$EXECUTEABLE2
 }
 
-CPDESKTFL  () {
-mkdir -p $DSKTPFLSDEST
-rm -f $DSKTPFLSDEST/$DSKTPFL
-cp $DSKTPFLS/$DSKTPFL $DSKTPFLSDEST/$DSKTPFL
-}
-
 WRTEDSKTPFLS () {
 mkdir -p $DSKTPFLSDEST
 
@@ -133,6 +77,61 @@ Terminal=true
 Type=Application
 Categories=9.Maintain-Access;1.OS-Backdoors;0.MultiOS-Backdoor;' > $DSKTPFLSDEST/$DSKTPFL
 }
+
+BANNER () {
+
+echo "${bold}
+ ____  ____  _____ 
+| __ )|  _ \|  ___|
+|  _ \| | | | |_   
+| |_) | |_| |  _|  
+|____/|____/|_|    
+           
+INSTALL secretsquirrel/the-backdoor-factory
+${normal}"
+}
+
+INSTDEPS () {
+### DEPS:
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python python-capstone python-pefile
+sudo udpatedb
+sudo ldconfig
+### DEPS END
+}
+
+INSTALLROUTINE1 () {
+ cd osslsigncode
+    ./autogen.sh
+    ./configure
+	make
+	make install
+    cd ..	
+
+	uname -a | grep -i "armv" &> /dev/null
+        if [ $? -ne 0 ]; then
+                echo "[*] installing appack for onionduke"
+		echo "[*] installing dependences"
+		sudo apt-get install libc6-dev-i386
+                cd ./aPLib/example/
+                gcc -c -I../lib/elf -m32 -Wall -O2 -s -o appack.o appack.c -v 
+                gcc -m32 -Wall -O2 -s -o appack appack.o ../lib/elf/aplib.a -v 
+                sudo cp ./appack /usr/bin/appack        
+        else
+                echo "[!!!!] Arm not supported for aPLib"
+	fi
+}
+######################## MISC - END ########################
+
+which nmap > /dev/null 2>&1
+if [ "$?" -eq "0" ]; then
+
+echo "${bold} the-backdoor-factory is installed! Skip installation!${normal}"
+
+else
+echo "${bold} the-backdoor-factory  is not installed! Installing!${normal}"
 
 BANNER
 
@@ -156,3 +155,6 @@ echo -e " ${bold} ... copy xfce .desktop files${normal}"
 WRTEDSKTPFLS
 
 echo -e " $YELLOW ${bold} secretsquirrel/the-backdoor-factory backdoor factory installation COMPLETE :)${normal}"
+
+fi
+
