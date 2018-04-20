@@ -155,4 +155,4 @@ SYMLINKEX2TO1
 echo -e " ${bold} ... copy xfce .desktop files${normal}"
 WRTEDSKTPFLS
 
-echo -e " $YELLOW ${bold} backdoor factory setup COMPLETE :)${normal}"
+echo -e " $YELLOW ${bold} secretsquirrel/the-backdoor-factory backdoor factory installation COMPLETE :)${normal}"
