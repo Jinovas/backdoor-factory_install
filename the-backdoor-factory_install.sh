@@ -125,7 +125,7 @@ INSTALLROUTINE1 () {
 }
 ######################## MISC - END ########################
 
-which nmap > /dev/null 2>&1
+which backdoor-factory > /dev/null 2>&1
 if [ "$?" -eq "0" ]; then
 
 echo "${bold} the-backdoor-factory is installed! Skip installation!${normal}"
