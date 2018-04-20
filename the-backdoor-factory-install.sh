@@ -4,8 +4,7 @@
 
 ######################## CONFIG_MAIN - START ########################
 
-#1i
-. /opt/ownsec/ITSEC-Install-Scripts-ORIG/001.functions/all-scripts.sh
+
 
 GITREPO=https://github.com/secretsquirrel/the-backdoor-factory
 BRANCH=master
@@ -119,6 +118,20 @@ CPDESKTFL  () {
 mkdir -p $DSKTPFLSDEST
 rm -f $DSKTPFLSDEST/$DSKTPFL
 cp $DSKTPFLS/$DSKTPFL $DSKTPFLSDEST/$DSKTPFL
+}
+
+WRTEDSKTPFLS () {
+mkdir -p $DSKTPFLSDEST
+
+echo '
+[Desktop Entry]
+Name=the_backkdoor-factory
+Encoding=UTF-8
+Exec=sudo sh -c " backkdoor-factory;${SHELL:-bash}"
+StartupNotify=false
+Terminal=true
+Type=Application
+Categories=9.Maintain-Access;1.OS-Backdoors;0.MultiOS-Backdoor;' > $DSKTPFLSDEST/$DSKTPFL
 }
 
 BANNER
