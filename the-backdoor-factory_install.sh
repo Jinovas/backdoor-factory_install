@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 
 ## /secretsquirrel/the-backdoor-factory Factory Setup - XFCE, 16.04
 
