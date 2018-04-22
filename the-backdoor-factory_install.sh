@@ -12,6 +12,7 @@ GITREPOROOT=/opt/ITSEC/9.Maintain-Access/1.OS-Backdoors/0.MultiOS-Backdoor/the-b
 GITCLONEDIR=/opt/ITSEC/9.Maintain-Access/1.OS-Backdoors/0.MultiOS-Backdoor/the-backdoor-factory/secretsquirrel
 EXECUTEABLE1=backdoor.py
 EXECUTEABLE2=backdoor-factory
+BINDIR=/usr/local/bin
 DSKTPFLS=/opt/ownsec/ITSEC-Install-Scripts-ORIG/9.Maintain-Access/1.OS-Backdoors/0.MultiOS-Backdoor/the-backdoor-factory
 DSKTPFLSDEST=/home/$USER/.local/share/applications/9.Maintain-Access/1.OS-Backdoors/0.MultiOS-Backdoor/the-backdoor-factory
 DSKTPFL=backdoorfactory.desktop
@@ -94,7 +95,8 @@ INSTDEPS () {
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python python-capstone python-pefile
+sudo apt-get install python python-capstone python-pefile autoconf libtool curl libcurl4-openssl-dev
+
 sudo udpatedb
 sudo ldconfig
 ### DEPS END
