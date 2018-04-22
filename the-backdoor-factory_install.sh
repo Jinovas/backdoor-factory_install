@@ -91,11 +91,38 @@ ${normal}"
 }
 
 INSTDEPS () {
+
+LIBS_DEPS="libtool
+libcurl4-openssl-dev
+"
+
+PYTHON_DEPS="python
+python-capstone
+python-pefile
+"
 ### DEPS:
+
+OTHER_DEPS="autoconf
+curl
+"
 
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python python-capstone python-pefile autoconf libtool curl libcurl4-openssl-dev
+
+echo $LIBS_DEPS | while read libsdeps
+do
+   sudo apt-get install -y $libsdeps
+done
+
+echo $PYTHON_DEPS | while read pythondeps
+do
+   sudo apt-get install -y $pythondeps
+done
+
+echo $OTHER_DEPS | while read otherdeps
+do
+   sudo apt-get install -y $otherdeps
+done
 
 sudo udpatedb
 sudo ldconfig
